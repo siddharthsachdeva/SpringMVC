@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="views/master">
+
+<body>
+	<div layout:fragment="page-content">
+		<div class="container-fluid">
+			<!-- BEGIN PAGE CONTENT-->
+
+			<div class="row-fluid errmsg" runat="server" id="dvError"
+				visible="false">
+				<div style="width: 100%; text-align: center;">
+					<div class="message success">
+						<p th:text="${message}" ></p>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="row-fluid">
+				<div class="span12">
+					<!-- BEGIN SAMPLE FORM PORTLET-->
+					<div class="portlet box blue tabbable">
+						<div class="portlet-title">
+							<h4>
+								<i class="icon-reorder"></i><span class="hidden-480">Add/Edit
+									Questions</span>&nbsp;
+							</h4>
+						</div>
+						<div class="portlet-body form">
+							<div class="tabbable portlet-tabs">
+								<ul class="nav nav-tabs">&nbsp;
+								</ul>
+								<div class="tab-content">
+
+									<div class="tab-pane active" id="portlet_tab1">
+										<!-- BEGIN FORM-->
+										<div class="control-group"></div>
+
+									</div>
+									<div class="mytable" style="overflow: auto;">
+										<div class="control-group">
+											<div class="controls questionMar01 questionColor ">
+												<!--  Note:- Please enter @@ in your question where you want company name -->
+											</div>
+										</div>
+
+						<form  class="form-horizontal" action="#" th:action="@{/question/save}" th:object="${questionsList}" method="POST">
+
+									<div>
+										<input th:field="*{question1}" style="height:30px"  id="txtQuestion1"
+											placeholder="Enter Question 1 Here" class="m-wrap large"
+											type="text" /> 
+											<br/><br/>
+											<input th:field="*{question2}" style="height:30px"  id="txtQuestion2"
+											placeholder="Enter Question 2 Here" class="m-wrap large"
+											type="text"/>
+											<br/><br/>
+											<input  th:field="*{question3}" style="height:30px"  id="txtQuestion3"
+											placeholder="Enter Question 3 Here" class="m-wrap large"
+											type="text"  /> 
+									</div>
+
+										<div>&nbsp;</div>
+									
+									
+										<div class="form-actions">
+										<!-- <input type="submit" class="btn blue okMark" /> -->
+											<button type="submit" class="btn blue okMark">Save</button>
+											<a href="/dashboard/"> <button type="button" class="btn cancel">Cancel</button></a>
+										</div>
+									</form>
+									
+									<!-- END FORM-->
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- END SAMPLE FORM PORTLET-->
+				</div>
+			</div>
+			<!-- END PAGE CONTENT-->
+		</div>
+	</div>
+	</div>
+
+</body>
+</html>

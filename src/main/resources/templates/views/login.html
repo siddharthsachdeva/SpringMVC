@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://thymeleaf.org">
+<head>
+<!-- <meta charset="ISO-8859-1"> -->
+
+<title>Beezy | Admin Area</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta content="" name="description" />
+<meta content="" name="author" />
+<link type="text/css" th:href="@{/assets/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+<link type="text/css" th:href="@{/assets/css/metro.css}" rel="stylesheet" />
+<link type="text/css" th:href="@{/assets/font-awesome/css/font-awesome.css}" rel="stylesheet" />
+<link type="text/css" th:href="@{/assets/css/style.css}" rel="stylesheet" />
+<link type="text/css" th:href="@{/assets/css/style_responsive.css}" rel="stylesheet" />
+<link type="text/css" th:href="@{/assets/css/style_default.css}" rel="stylesheet"
+	id="style_color" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/assets/uniform/css/uniform.default.css}" />
+<link type="text/css" th:href="@{/assets/css/generic.css}" rel="stylesheet" />
+<script type="text/javascript" th:src="@{/assets/js/jquery-1.8.3.min.js}"></script>
+</head>
+<body class="login">
+   <!-- BEGIN LOGO -->
+    <div class="logo">
+        <img th:src="@{/assets/img/loginlogo.png}" alt="Beezy" />
+    </div>
+    <!-- END LOGO -->
+    
+    <!-- BEGIN LOGIN -->
+    <div class="content">
+        <!-- BEGIN LOGIN FORM -->
+        <form th:action="@{/}" method="post" class="form-vertical login-form" id="commentForm"  defaultbutton="btnlogin" autocomplete="off">
+            
+        <h3 class="form-title">
+            Login to your account</h3>
+        <div class="alert alert-error hide">
+            <button class="close" data-dismiss="alert">
+            </button>
+            <span>Enter your email and password.</span>
+        </div>
+        <div class="alert " id="dverr" runat="server" style="display: none">
+            <button class="close" data-dismiss="alert">
+            </button>
+            <span>Incorrect email and password.</span>
+        </div>
+
+            <div class="alert " id="dverr_block" style="display: none">
+            <button class="close" data-dismiss="alert">
+            </button>
+            <span>Your account has been blocked.</span>
+        </div>
+        
+        <div th:if="${param.error}">
+     		<span style="color:red">Invalid username or password.</span>
+		</div>
+
+        <div class="control-group">
+            <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+            <label class="control-label visible-ie8 visible-ie9">
+                Username</label>
+            <div class="controls">
+                <div class="input-icon left">
+                    <i class="icon-user"></i>
+                    <label id="txtUserName" class="m-wrap placeholder-no-fix"
+                    placeholder="Please enter user name."/>
+                    
+                     <input class="m-wrap placeholder-no-fix" type="text" placeholder="Username" name="username" />
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label visible-ie8 visible-ie9">
+                Password</label>
+            <div class="controls">
+                <div class="input-icon left">
+                    <i class="icon-lock"></i>
+                    <label class="m-wrap placeholder-no-fix"
+                         placeholder="Please enter password." />
+                    
+                    <input class="m-wrap placeholder-no-fix" type="password" placeholder="Password" name="password" />
+                </div>
+            </div>
+        </div>
+            <div class="clearfix"></div>
+        <div class="form-actions">
+            <label class="checkbox">
+                <input type="checkbox" name="remember-me"  />
+                Remember me
+            </label>
+            <a>
+                <button class="btn green arrow_right pull-right"
+                    id="btnlogin" onclick="btnlogin_Click" >Login</button></a>
+        </div>
+   
+        </form>
+        <!-- END LOGIN FORM -->
+</div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="views/master">
+<head>
+
+<link rel="stylesheet" type="text/css" th:href="@{/sid-css/css.css}" />
+
+<script  type="text/javascript" th:src="@{/sid-js/popup.js}"></script>
+
+</head>
+
+<body>
+
+	<div layout:fragment="page-content">
+
+		<h1>Hello World!!</h1>
+
+		<button  type="button" class="open-popup">Click to open</button>
+		
+		
+		<!-- Modal starts -->
+		<div class="modal-pop-outer" style="display: none;">
+		
+			<div class="modal-pop-inner">
+				
+				
+			<!-- 	<button type="button" class="close-popup">X</button>
+				
+				<h2>Pop up Modal</h2>
+				<p>Content goes here</p> -->
+				
+				<div class="portlet box blue">
+				<div class="portlet-title">
+                        <h4><i class="icon-reorder"></i><span class="hidden-480">Edit Company Influence</span>&nbsp;</h4>
+                    </div>
+                    <div class="portlet-body form">
+                        <div class="tab-content">
+                            <div class="row-fluid errmsg" runat="server" id="dvErrorModal" visible="false">
+                                <div style="width: 100%; text-align: center;">
+                                    <div class="message error2">
+                                        <p>
+                                            
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane active" id="Div1">
+                                <!-- BEGIN FORM-->
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        Influence Name</label>
+                                    <div class="controls">
+                                        <input style="height:30px" ID="txtServiceName" placeholder="Influence Name" class="m-wrap large" runat="server"></asp:TextBox>
+                                        
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        Icon File</label>
+                                    <div class="controls">
+                                        <input type="file" ID="FUIcon" runat="server" placeholder="Select influence icon" CssClass="m-wrap large" accept="image/*" onchange="return readURL(this);" />
+                                        Upload Image (100X100)
+                                        
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                    </label>
+                                    <div class="controls">
+                                        <div style="background-color: #F2EDB8; width: 55px; height: 55px; text-align: center">
+                                            <img th:src="@{/serviceicon/smallNoimg.jpg}" runat="server" id="showImage" style="width: 50px; height: 50px" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="button" ID="btnSave"  class="btn blue okMark close-popup" runat="server" OnClick="btnSave_Click" ValidationGroup="validaitonEdit" >Update</button>
+                                    <button type="button"  ID="btnClose" class="close-popup btn" runat="server"  >Cancel</button>
+                                </div>
+                                <!-- END FORM-->
+                            </div>
+                        </div>
+                    </div>
+				</div>
+				
+			
+			</div>
+		
+		</div>
+		
+		<!-- Modal ends -->
+
+
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://thymeleaf.org"
+	xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity4"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="ISO-8859-1">
+<title>Beezy | Admin Area</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />    
+    <meta content="" name="description" />
+    <meta content="" name="author" />        
+    <script class="jsbin" th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js}"></script>
+    <script class="jsbin" th:src="@{https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js}"></script>
+    <link th:href="@{/assets/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/assets/css/metro.min.css}" rel="stylesheet" />
+    <link th:href="@{/assets/bootstrap/css/bootstrap-responsive.min.css}" rel="stylesheet" />
+    <link th:href="@{/assets/bootstrap/css/bootstrap-responsive.css}" rel="stylesheet" />
+    <link th:href="@{/assets/font-awesome/css/font-awesome.css}" rel="stylesheet" />
+    <link th:href="@{/assets/css/style.min.css}" rel="stylesheet" />
+
+    <link th:href="@{/assets/css/style_responsive.css}" rel="stylesheet" />
+    <link th:href="@{/assets/css/style_default.css}" rel="stylesheet" id="style_color" />
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/bootstrap-datepicker/css/datepicker.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/bootstrap-timepicker/compiled/timepicker.css}" />
+    <link rel="stylesheet" th:href="@{/assets/bootstrap-toggle-buttons/static/stylesheets/bootstrap-toggle-buttons.css}" />
+    <link th:href="@{/assets/jquery-validation/demo/css/screen.css}" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" th:src="@{/assets/js/jquery-1.8.3.min.js}"></script>
+    <script language="javascript" type="text/javascript">        window.jQuery || document.write('<script src="../assets/bootstrap-toggle-buttons/static/js/jquery.min.js"><\/script>')</script>
+    <script language="javascript" type="text/javascript" th:src="@{/assets/bootstrap-toggle-buttons/static/js/jquery.toggle.buttons.js}"></script>
+
+<!-- Include the Quill library -->
+<script th:src="@{https://cdn.quilljs.com/1.3.4/quill.js}"></script>
+<script th:src="@{https://cdn.quilljs.com/1.3.4/quill.min.js}"></script>
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js}"></script>
+
+<link th:href="@{https://cdn.quilljs.com/1.3.4/quill.snow.css}" rel="stylesheet" />
+<link th:href="@{https://cdn.quilljs.com/1.3.4/quill.bubble.css}" rel="stylesheet" />
+
+<script th:src="@{https://code.jquery.com/jquery-1.9.0.js}"></script>
+<script th:src="@{https://code.jquery.com/jquery-migrate-1.2.1.js}"></script>
+
+<link th:href="@{/sid-css/css.css}" rel="stylesheet" />
+
+
+
+ <script type="text/javascript" language="javascript">
+function ResetScrollPosition() {
+             //setTimeout("window.scrollTo(0,0)", 500);
+             try
+             {
+                 App.scrollTo();
+             }
+             catch (ex) {
+                 alert(ex.message);
+             }
+         }
+            </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if ($('.errmsg').is(':visible')) {
+                $('.errmsg').fadeOut(9000);
+            }
+            //var currurl = window.location.pathname; // return 
+            var currurl = document.URL; //returns complete current web url
+            var index = currurl.lastIndexOf("/") + 1;
+            var pagename = currurl.substr(index);
+            $('.tempclass').find("li").each(function () {
+                if ($(this).find("a").attr("href") == pagename) {
+                    $(this).addClass("active");
+                }
+                else {
+                    $(this).find("ul.sub").find("li").each(function () {
+                        $(this).filter(function () {
+                            return $(this).find("a").attr("href") == pagename
+                        }).addClass("active").parent().parent().addClass("active").find("a").append("<span class='selected'></span>");
+                    });
+                }
+            });
+        });
+    </script>
+
+   
+    <link th:href="@{/css/mobiscroll.scroller.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/mobiscroll.scroller.android.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/mobiscroll.scroller.android-ics.css}" rel="stylesheet" type="text/css" />
+   
+
+</head>
+<body class="fixed-top">
+
+ <!-- <form id="commentForm" clientidmode="Static" class="form-horizontal" runat="server"> -->
+        <!-- BEGIN HEADER -->
+        
+
+        <div class="header navbar navbar-inverse navbar-fixed-top">
+            <!-- BEGIN TOP NAVIGATION BAR -->
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <!-- BEGIN LOGO -->
+                    <a class="brand" href="/dashboard/">
+                        <img th:src="@{/assets/img/logoinner.png}" alt="logo" />
+                    </a>
+                    <!-- END LOGO -->
+                    <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+                    <a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+                        <img th:src="@{/assets/img/menu-toggler.png}" alt="" />
+                    </a>
+                    <!-- END RESPONSIVE MENU TOGGLER -->
+                    <!-- BEGIN TOP NAVIGATION MENU -->
+                    <ul class="nav pull-right">
+                        <li class="dropdown user"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <!-- <img alt="" src="assets/img/avatar1_small.jpg" />-->
+                            <span class="username">Hello</span>
+                            <!-- <span th:text="${loggedInUser}"></span> -->
+                            <!-- <span sec:authentication="name"></span> -->
+                            
+                             <i class="icon-angle-down"></i></a>
+                            <ul class="dropdown-menu">                               
+                                <li>
+                                    <a href="/manageAdminUser/changeAdminPassword/">
+                                    <i class="icon-lock"></i>Change Password
+                                    </a>
+                                </li>
+                                 <li>
+                                    <a th:href="@{/logout}" id="lnkLogOut" onclick="lnkLogOut_Click">
+                                    <i class="icon-key"></i>Log Out
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- END USER LOGIN DROPDOWN -->
+                    </ul>
+                    <!-- END TOP NAVIGATION MENU -->
+                    <div class="home"><a href="/dashboard/" title="go to homepage">
+                        <img th:src="@{/images/home.png}"></a></div>
+                </div>
+            </div>
+            <!-- END TOP NAVIGATION BAR -->
+        </div>
+        <!-- END HEADER -->
+        <!-- BEGIN CONTAINER -->
+        <div class="page-container row-fluid">
+            <!-- BEGIN SIDEBAR -->
+            <div class="page-sidebar nav-collapse collapse">
+                <!-- BEGIN SIDEBAR MENU -->
+                <ul class="tempclass">
+                    <li>
+                        <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                        <div class="sidebar-toggler hidden-phone">
+                        </div>
+                        <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                    </li>
+
+                    
+                    <li visible="false" class="has-sub" id="ManageUsers" runat="server">
+                        
+                        <a href="javascript:;"><i class="icon-user"></i><span class="title">Manage Admin</span> <span class="arrow"></span></a>
+                        <ul class="sub">
+                            <li><a href="/manageAdminUser/addEditAdminUser/">Add/Edit Admin Users</a></li>
+                            
+                          
+                        </ul>
+                    </li>
+
+                    
+                    <li visible="false" class="has-sub " runat="server" id="ManageCategory"><a href="javascript:;"><i class="icon-asterisk"></i><span class="title">Manage Category</span> <span class="arrow "></span></a>
+                        <ul class="sub">
+                            <li><a href="/manageCategory/addEditCategory/">Add/Edit Categories</a></li>
+                            <!-- <li><a href="/manageCategory/categoryPositions/">Category Positions</a></li> -->
+                        </ul>
+                    </li>
+                    <li visible="false" class="has-sub" id="li1" runat="server">
+                        <a href="javascript:;"><i class="icon-star"></i><span class="title">Manage Company</span> <span class="arrow"></span></a>
+                        <ul class="sub">
+                            <li><a href="/manageCompany/addEditCompany/">Add/Edit Companies</a></li>
+                            <!-- <li><a href="/manageCompany/unregisteredCompany/">Unregistered Companies</a></li> -->
+                            <!-- <li><a href="/manageCompany/mergeUnregisteredCompany/">Merge Unregistered Companies</a></li> -->
+                        </ul>
+                    </li>                   
+                    <li visible="false" class="has-sub " runat="server" id="ManageInflances">
+                        <!-- menu name change -->
+                        <a href="javascript:;"><i class="icon-asterisk"></i><span style="font-size:13px;" class="title">Manage Influences</span> <span class="arrow "></span></a>
+                        <ul class="sub">
+                            <li><a href="/influence/addEditInfluences/">Add/Edit Influences</a></li>
+                            <!-- <li><a href="/influence/addEditCompanyInfluences/">Add/Edit Category Influences</a></li> -->
+                        </ul>
+                    </li>
+                    <li visible="false" class="has-sub" id="li2" runat="server">
+                        <a href="/question/"><i class="icon-qrcode"></i><span class="title">Manage Questions</span> <span class="arrow"></span></a>
+                    </li>                    
+                    <li visible="false" class="has-sub" id="ManageStaticPage" runat="server">
+                        
+                        <a href="/staticPagesEditor/"><i class="icon-star"></i><span class="title">About Us & T&Cs</span> <span class="arrow"></span></a>
+                    </li>                    
+                    <li visible="false" class="has-sub " runat="server" id="li3">
+                        <a href="javascript:;"><i class="icon-asterisk"></i><span class="title">Manage Reviews</span> <span class="arrow "></span></a>
+                        <ul class="sub">
+                            
+
+                            <li><a href="/review/userReviews">User Reviews</a></li>
+                            <!-- <li><a href="/review/partialReviews/">Partial Reviews</a></li> -->
+                            <!-- <li><a href="#">All Reviews</a></li> -->
+                            <li><a href="/review/reviewLimit/">Review Limit</a></li>
+
+                            
+                        </ul>
+                    </li>
+                    
+                      <li visible="false" class="has-sub " runat="server" id="li3">
+                        <a href="javascript:;"><i class="icon-star"></i><span class="title">Manage Rewards</span> <span class="arrow "></span></a>
+                        <ul class="sub">
+                            
+
+                            <li><a href="/reward/manageRewards/">Add/Edit Rewards</a></li>
+                            
+
+                            
+                        </ul>
+                    </li>
+                
+                    <li visible="true" class="has-sub " runat="server" id="li4">
+                        <a href="javascript:;"><i class="icon-qrcode"></i><span class="title">Manage App Users</span> <span class="arrow "></span></a>
+                        <ul class="sub">                            
+                            <!-- <li><a href="/manageAppUser/manageTitle/">Manage Titles</a></li> -->
+                            <li><a href="/manageAppUser/viewUsers/">View Users</a></li>
+                            <li><a href="/manageAppUser/userFeedback/">User Feedback</a></li>
+                            <li><a href="#">Email Users</a></li>
+                            <li><a href="/manageAppUser/manageIssueType/">Manage Issue Type</a></li>
+                            <li><a href="/manageAppUser/userIssue/">User Issue</a></li>
+                        </ul>
+                    </li>                
+                </ul>
+            </div>
+            <div class="block" id="dvmsg">
+                    <!-- Can show error in below div -->
+                    <div >
+                    </div>
+                </div>
+            <div  layout:fragment="page-content" class="page-content">
+                <div id="portlet-config" class="modal hide">
+                    <div class="modal-header">
+                        <button data-dismiss="modal" class="close" type="button">
+                        </button>
+                        <h3>portlet Settings</h3>
+                    </div>
+                    <div  class="modal-body">
+                        <p>
+                            Here will be a configuration form
+                        </p>
+                    </div>
+                </div>
+                <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                
+   
+                <!-- BEGIN PAGE CONTAINER-->
+                <!-- END PAGE CONTAINER-->
+            </div>
+            <!-- END PAGE -->
+        </div>
+        <!-- END CONTAINER -->
+        <!-- BEGIN FOOTER -->
+        <div class="footer">
+            Beezy
+        <div class="span pull-right">
+            <span class="go-top"><i class="icon-angle-up"></i></span>
+        </div>
+        </div>
+    <!-- </form> -->
+   <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+	<script type="text/javascript" th:src="@{/assets/breakpoints/breakpoints.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/jquery.blockui.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/jquery.cookie.js}"></script>
+    
+    <script th:src="@{/assets/js/jquery.validate.js}" type="text/javascript"></script>
+    <script type="text/javascript" th:src="@{/assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+    <script th:src="@{/Scripts/jquery.nicescroll.min.js}" type="text/javascript"></script>
+    <script type="text/javascript" th:src="@{/assets/bootstrap-timepicker/js/bootstrap-timepicker.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/app.js}"></script>
+    
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            // initiate layout and plugins
+            $(".date-picker").on('blur', function (e) {
+                var date = $(this).val();
+                var validformat = /^\d{2}\/\d{2}\/\d{4}$/
+                if (date != "" && !(validformat.test(date))) {
+                    alert('Enter date in dd/MM/yyyy format please');
+                    $(this).val("");
+                    return false;
+                }
+            });
+            $(".scroll_view").niceScroll({ touchbehavior: true }); // First scrollable DIV
+            App.init();
+        });
+    </script>
+
+    <script th:src="@{/js/mobiscroll.core.js}" type="text/javascript"></script>
+    <script th:src="@{/js/mobiscroll.scroller.js}" type="text/javascript"></script>
+    <script th:src="@{/js/mobiscroll.datetime.js}" type="text/javascript"></script>
+    <script th:src="@{/js/mobiscroll.scroller.android.js}" type="text/javascript"></script>
+    <script th:src="@{/js/mobiscroll.scroller.android-ics.js}" type="text/javascript"></script>    
+    <script>
+        $(function () {
+            $(".datepicker").datepicker({ format: 'dd/mm/yyyy', pickTime: false});                        
+        });        
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $('.datePick').mobiscroll().date({
+                theme: 'android-ics light',
+                display: 'bubble',
+                mode: 'scroller',
+                dateFormat: 'dd/mm/yy',
+                dateOrder: 'Mddyy'
+            });
+            $('.timePick').mobiscroll().time({
+                theme: 'android-ics light',
+                display: 'bubble',
+                mode: 'scroller',
+                stepMinute: 5
+            });
+            $('.timePick1').click(function () {
+                $(this).parent().find('.timePick').mobiscroll('show');
+                //$('.timePick').mobiscroll('show');
+                return false;
+            });
+        });
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+</html>

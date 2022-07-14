@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://thymeleaf.org"
+	xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity4"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="views/master">
+
+<body>
+<div layout:fragment="page-content">
+
+<div class="container-fluid">
+        <div id="dashboard">
+            <!-- BEGIN DASHBOARD STATS -->
+            <div class="row-fluid">
+                
+                <div class="span3 responsive setAllign" data-tablet="span6" data-desktop="span3" id="ManageUsers" runat="server" visible="false">
+                    <a class="more" href="/manageAdminUser/addEditAdminUser/">
+                        <div class="dashboard-stat green">
+                            <div class="visual">
+                                <i class="icon-plus"></i>
+                            </div>
+                            <div class="details">
+                                <div class="number">
+                                </div>
+                                <div class="desc">
+                                    Manage Admin
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="span3 responsive setAllign" data-tablet="span6" data-desktop="span3" id="ManageCategory" runat="server" visible="false">
+                    <a class="more" href="/manageCategory/addEditCategory/">
+                        <div class="dashboard-stat blue">
+                            <div class="visual">
+                                <i class="icon-plus"></i>
+                            </div>
+                            <div class="details">
+                                <div class="number">
+                                </div>
+                                <div class="desc">
+                                    Manage Category
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="span3 responsive setAllign" data-tablet="span6" data-desktop="span3" runat="server" id="li1" visible="false">
+                    <a class="more" href="/manageCompany/addEditCompany/">
+                        <div class="dashboard-stat pink">
+                            <div class="visual">
+                                <i class="icon-plus"></i>
+                            </div>
+                            <div class="details">
+                                <div class="number">
+                                </div>
+                                <div class="desc">
+                                    Manage Company
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="span3 responsive setAllign" data-tablet="span6" data-desktop="span3" runat="server" id="ManageInflances" visible="false">
+                    <a class="more" href="/influence/addEditCategoryInfluences/">
+                        <div class="dashboard-stat purple">
+                            <div class="visual">
+                                <i class="icon-plus"></i>
+                            </div>
+                            <div class="details">
+                                <div class="number"></div>
+                                <div class="desc" style="font-size:15px;">Manage Services/Products</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="span3 responsive setAllign" data-tablet="span6 fix-offset" data-desktop="span3" runat="server" id="li2" visible="false">
+                    <a class="more" href="/question/">
+                        <div class="dashboard-stat red">
+                            <div class="visual">
+                                <i class=" icon-plus"></i>
+                            </div>
+                            <div class="details">
+                                <div class="number">
+                                </div>
+                                <div class="desc">
+                                    Manage Questions</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="span3 responsive setAllign" data-tablet="span6 fix-offset" data-desktop="span3" runat="server" id="li3" visible="false">
+                    <a class="more" href="/review/fullReviews/">
+                        <div class="dashboard-stat yellow">
+                            <div class="visual">
+                                <i class=" icon-plus"></i>
+                            </div>
+                            <div class="details">
+                                <div class="number">
+                                </div>
+                                <div class="desc">
+                                    Reviews</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="span3 responsive setAllign" data-tablet="span6" data-desktop="span3" runat="server" id="ManageStaticPage" visible="false">
+                    <a class="more" href="/staticPagesEditor/">
+                        <div class="dashboard-stat lightgreen">
+                            <div class="visual">
+                                <i class="icon-plus"></i>
+                            </div>
+                            <div class="details">
+                                <div class="number"></div>
+                                <div class="desc">About Us & T&Cs</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- END DASHBOARD STATS -->
+            <div class="clearfix">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

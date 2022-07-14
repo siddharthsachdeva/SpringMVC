@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="views/master">
+
+<body>
+
+	<div layout:fragment="page-content">
+	
+	
+	<div class="container-fluid">
+        <!-- BEGIN PAGE CONTENT-->
+
+                <div class="row-fluid errmsg" runat="server" id="dvError" visible="false">
+                    <div style="width: 100%; text-align: center;">
+                        <div class="message success">
+                            <p>
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+        <div class="row-fluid">
+            <div class="span12">
+                <!-- BEGIN SAMPLE FORM PORTLET-->
+                <div class="portlet box blue tabbable">
+                    <div class="portlet-title">
+                        <h4><i class="icon-reorder"></i><span class="hidden-480">Category Positions</span>&nbsp;</h4>
+                    </div>
+                    <div class="portlet-body form">
+                        <div class="tabbable portlet-tabs">
+                            <ul class="nav nav-tabs">
+                                &nbsp;
+                            </ul>
+                            <div class="tab-content">
+                                
+                                        <div class="tab-pane active" id="portlet_tab1">
+                                            <!-- BEGIN FORM-->
+                                            <div class="control-group">
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="span6">
+                                                    <div class="control-group">
+                                                        <label class="control-label">
+                                                            Country</label>
+                                                        <div class="controls">
+                                                            <select ID="ddlCountry" runat="server" class="m-wrap medium" AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged">
+                                                            <option disabled="" selected="">---Select Country---</option>
+                                                            </select>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="span6"></div>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="span6">
+                                                    <div class="control-group">
+                                                        <label class="control-label">
+                                                            Position 1</label>
+                                                        <div class="controls">
+                                                            <select ID="ddlPosition1" runat="server" class="m-wrap medium" AutoPostBack="true" OnSelectedIndexChanged="ddlPosition1_SelectedIndexChanged">
+                                                            </select>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="span6">
+                                                    <div class="control-group">
+                                                        <label class="control-label">
+                                                            Position 2</label>
+                                                        <div class="controls">
+                                                            <select ID="ddlPosition2" runat="server" class="m-wrap medium" AutoPostBack="true" OnSelectedIndexChanged="ddlPosition2_SelectedIndexChanged">
+                                                            </select>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="span6">
+                                                    <div class="control-group">
+                                                        <label class="control-label">
+                                                            Position 3</label>
+                                                        <div class="controls">
+                                                            <select ID="ddlPosition3" runat="server" class="m-wrap medium" AutoPostBack="true" OnSelectedIndexChanged="ddlPosition3_SelectedIndexChanged">
+                                                            </select>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="span6">
+                                                    <div class="control-group">
+                                                        <label class="control-label">
+                                                            Position 4</label>
+                                                        <div class="controls">
+                                                            <select ID="ddlPosition4" runat="server" class="m-wrap medium" AutoPostBack="true" OnSelectedIndexChanged="ddlPosition4_SelectedIndexChanged">
+                                                            </select>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="span6">
+                                                    <div class="control-group">
+                                                        <label class="control-label">
+                                                            Position 5</label>
+                                                        <div class="controls">
+                                                            <select ID="ddlPosition5" runat="server" class="m-wrap medium" AutoPostBack="true" OnSelectedIndexChanged="ddlPosition5_SelectedIndexChanged">
+                                                            </select>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="span6">
+                                                    <div class="control-group">
+                                                        <label class="control-label">
+                                                            Position 6</label>
+                                                        <div class="controls">
+                                                            <select ID="ddlPosition6" runat="server" class="m-wrap medium" AutoPostBack="true" OnSelectedIndexChanged="ddlPosition6_SelectedIndexChanged">
+                                                            </select>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="span6">
+                                                    <div class="control-group">
+                                                        <label class="control-label">
+                                                            Position 7</label>
+                                                        <div class="controls">
+                                                            <select ID="ddlPosition7" runat="server" class="m-wrap medium" AutoPostBack="true" OnSelectedIndexChanged="ddlPosition7_SelectedIndexChanged">
+                                                            </select>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="span6">
+                                                    <div class="control-group">
+                                                        <label class="control-label">
+                                                            Position 8</label>
+                                                        <div class="controls">
+                                                            <select ID="ddlPosition8" runat="server" class="m-wrap medium" AutoPostBack="true" OnSelectedIndexChanged="ddlPosition8_SelectedIndexChanged">
+                                                            </select>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="span6">
+                                                    <div class="control-group">
+                                                        <label class="control-label">
+                                                            Position 9</label>
+                                                        <div class="controls">
+                                                            <select ID="ddlPosition9" runat="server" class="m-wrap medium" AutoPostBack="true" OnSelectedIndexChanged="ddlPosition9_SelectedIndexChanged">
+                                                            </select>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="span6">
+                                                    <div class="control-group">
+                                                        <label class="control-label">
+                                                            Position 10</label>
+                                                        <div class="controls">
+                                                            <select ID="ddlPosition10" runat="server" class="m-wrap medium" AutoPostBack="true" OnSelectedIndexChanged="ddlPosition10_SelectedIndexChanged">
+                                                            </select>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="span6">
+                                                    <div class="control-group">
+                                                        <label class="control-label">
+                                                            Position 11</label>
+                                                        <div class="controls">
+                                                            <select ID="ddlPosition11" runat="server" class="m-wrap medium" AutoPostBack="true" OnSelectedIndexChanged="ddlPosition11_SelectedIndexChanged">
+                                                            </select>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="span6">
+                                                    <div class="control-group">
+                                                        <label class="control-label">
+                                                            Position 12</label>
+                                                        <div class="controls">
+                                                            <select ID="ddlPosition12" runat="server" class="m-wrap medium" AutoPostBack="true" OnSelectedIndexChanged="ddlPosition12_SelectedIndexChanged">
+                                                            </select>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-actions">
+                                                <button ID="btnsubmit" class="btn blue okMark" runat="server" OnClick="btnsubmit_Click" ValidationGroup="validaiton" >Save</button>
+                                            </div>
+                                            <!-- END FORM-->
+                                        </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END SAMPLE FORM PORTLET-->
+            </div>
+        </div>
+        <!-- END PAGE CONTENT-->
+    </div>
+	
+	
+	</div>
+
+</body>
+</html>

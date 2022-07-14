@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="views/master">
+
+<body>
+
+ <script>
+        function OpenWindow() {
+            if (ValidData()) {
+                var ddlCountry = document.getElementById('<%= ddlCountry.ClientID %>');
+                var ddlCompany = document.getElementById('<%= ddlCompany.ClientID %>');
+                var dateFrom = document.getElementById("txtDateFrom").value;
+                var dateTo = document.getElementById("txtDateTo").value;
+                var v = window.open('viewnpsreport.aspx?country=' + ddlCountry.options[ddlCountry.selectedIndex].text + '&companyId=' + ddlCompany.value + '&dateFrom=' + dateFrom + '&dateTo=' + dateTo + '&width=268', '', 'resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
+                v.moveTo(20, 10)
+                v.resizeTo(screen.availWidth - 100, screen.availHeight - 10)
+                return true;
+            }
+            return false;
+
+        }
+    </script>
+    <script th:src="@{/Scripts/submit.js}" language="javascript" type="text/javascript"></script>
+    <script type="text/javascript">
+        function ValidData() {
+            var dateFrom = document.getElementById("txtDateFrom").value;
+            var dateTo = document.getElementById("txtDateTo").value;
+            var ddlCountry = document.getElementById('<%= ddlCountry.ClientID %>');
+            var ddlCategory = document.getElementById('<%= ddlCategory.ClientID %>');
+            var ddlCompany = document.getElementById('<%= ddlCompany.ClientID %>');
+            if (ddlCountry.selectedIndex == 0) {
+                alert("Please select country");
+                return false;
+            }
+            else if (ddlCategory.selectedIndex == 0) {
+                alert("Please select category");
+                return false;
+            }
+            else if (ddlCompany.selectedIndex == 0) {
+                alert("Please select company");
+                return false;
+            }
+            else if (dateFrom == "") {
+                alert("Please enter from date");
+                return false;
+            }
+            else if (dateTo == "") {
+                alert("Please enter to date");
+                return false;
+            }
+            dateFrom = dateFrom.split("/");
+            dateFrom = dateFrom[2] + "-" + dateFrom[1] + "-" + dateFrom[0];
+            dateTo = dateTo.split("/");
+            dateTo = dateTo[2] + "-" + dateTo[1] + "-" + dateTo[0];
+            var d1 = Date.parse(dateFrom);
+            var d2 = Date.parse(dateTo);
+            if (d1 > d2) {
+                alert("Please enter valid date range");
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+
+<div layout:fragment="page-content">
+
+
+
+<div class="container-fluid">
+        <!-- BEGIN PAGE CONTENT-->
+        
+                <div class="row-fluid errmsg" runat="server" id="dvError" visible="false">
+                    <div style="width: 100%; text-align: center;">
+                        <div class="message success">
+                            <p>
+                               
+                            </p>
+                        </div>
+                    </div>
+                </div>
+        
+        <div class="row-fluid">
+            <div class="span12">
+                <!-- BEGIN SAMPLE FORM PORTLET-->
+                <div class="portlet box blue tabbable">
+                    <div class="portlet-title">
+                        <h4><i class="icon-reorder"></i><span class="hidden-480">My View</span>&nbsp;</h4>
+                    </div>
+                    <div class="portlet-body form">
+                        <div class="tabbable portlet-tabs">
+                            <ul class="nav nav-tabs">
+                                &nbsp;
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="portlet_tab1">
+                                    <!-- BEGIN FORM-->
+                                    <div class="control-group">
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">
+                                            Country</label>
+                                        <div class="controls">
+                              
+                                                    <select ID="ddlCountry" runat="server" class="m-wrap large" AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged">
+                                                    
+                                                   <option disabled="" selected="">---Select Country---</option> 
+                                                    </select>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">
+                                            Category</label>
+                                        <div class="controls">
+                                            
+                                                    <select ID="ddlCategory" runat="server" class="m-wrap large" AutoPostBack="True" OnSelectedIndexChanged="ddlCategory_SelectedIndexChanged">
+                                                    <option disabled="" selected="">---Select Category---</option>
+                                                    </select>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label">
+                                            Company</label>
+                                        <div class="controls">
+                                            
+                                                    <select ID="ddlCompany" runat="server" class="m-wrap large" AutoPostBack="true" OnSelectedIndexChanged="ddlCompany_SelectedIndexChanged">
+                                                    <option disabled="" selected="">---Select Company---</option>
+                                                    </select>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">
+                                            Date From</label>
+                                        <div class="controls">
+                                            <input placeholder="Date From" style="height:30px" ID="txtDateFrom" ClientIDMode="Static" runat="server" class="m-wrap m-ctrl-medium datepicker"/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">
+                                            Date To</label>
+                                        <div class="controls">
+                                            <input placeholder="Date To" style="height:30px" ID="txtDateTo" ClientIDMode="Static" runat="server" class="m-wrap m-ctrl-medium datepicker"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        
+                                                <button ID="btnsubmit" Text="Process" class="btn blue okMark" runat="server" OnClick="btnsubmit_Click" OnClientClick="return ValidData()" TabIndex="5" >Process</button>
+                                                <button ID="btnExportToExcel" Text="Export To Excel" class="btn green" runat="server" OnClick="btnExportToExcel_Click" OnClientClick="return ValidData()" Visible="true" >Export To Excel</button>
+                                                <button ID="btnExportToPDF" Text="Export To PDF" class="btn red" runat="server" OnClick="btnExportToPDF_Click" OnClientClick="return ValidData()" Visible="true" >Export To PDF</button>
+                                                <button ID="btnView" Text="View" class="btn blue" runat="server" OnClientClick="return OpenWindow()" >View</button>
+                                                <button ID="btnReportExportToPDF" Text="Export Report" class="btn red" runat="server" OnClick="btnReportExportToPDF_Click" OnClientClick="return ValidData()" >Export Report</button>
+                                        
+                                    </div>
+                                    <!-- END FORM-->
+                                    <br />
+                                    <div>
+                                        
+                                                <input style="height:30px" ID="txtFirstName" runat="server" class="m-wrap m-ctrl-medium" placeholder="Search First Name"/>
+                                                <input style="height:30px" ID="txtLastName" runat="server" class="m-wrap m-ctrl-medium" placeholder="Search Last Name"/>
+                                                <input style="height:30px" ID="txtEmail" runat="server" class="m-wrap m-ctrl-medium" placeholder="Search Email"/>
+                                                <br />
+                                                <br />
+                                                <select ID="ddlActive" runat="server">
+                                                    <option value="">All Account</option>
+                                                    <option value="Y">Active</option>
+                                                    <option value="N">Deactive</option>
+                                                </select>
+                                                <select ID="ddlGender" runat="server">
+                                                    <option value="">All Gender</option>
+                                                    <option value="MALE">MALE</option>
+                                                    <option value="FEMALE">FEMALE</option>
+                                                    <option value="Other">Other</option>
+                                                </select>
+                                                <select ID="ddlScore" runat="server">
+                                                    <option value="">All Score (>=)</option>
+                                                    <option value="0">&gt;=0</option>
+                                                    <option value="1">&gt;=1</option>
+                                                    <option value="2">&gt;=2</option>
+                                                    <option value="3">&gt;=3</option>
+                                                    <option value="4">&gt;=4</option>
+                                                    <option value="5">&gt;=5</option>
+                                                    <option value="6">&gt;=6</option>
+                                                    <option value="7">&gt;=7</option>
+                                                    <option value="8">&gt;=8</option>
+                                                    <option value="9">&gt;=9</option>
+                                                    <option value="10">&gt;=10</option>
+                                                </select>
+                                                <select ID="ddlScore2" runat="server">
+                                                    <option value="">All Score (<=)</option>
+                                                    <option value="0">&lt;=0</option>
+                                                    <option value="1">&lt;=1</option>
+                                                    <option value="2">&lt;=2</option>
+                                                    <option value="3">&lt;=3</option>
+                                                    <option value="4">&lt;=4</option>
+                                                    <option value="5">&lt;=5</option>
+                                                    <option value="6">&lt;=6</option>
+                                                    <option value="7">&lt;=7</option>
+                                                    <option value="8">&lt;=8</option>
+                                                    <option value="9">&lt;=9</option>
+                                                    <option value="10">&lt;=10</option>
+                                                </select>
+                                                <br />
+                                                <br />
+                                                <input style="height:30px" ID="txtZipcode" runat="server" class="m-wrap m-ctrl-medium" placeholder="Search Zipcode"></asp:TextBox>
+                                                <input style="height:30px" ID="txtCity" runat="server" class="m-wrap m-ctrl-medium" placeholder="Search City"></asp:TextBox>
+                                                <input style="height:30px" ID="txtState" runat="server" class="m-wrap m-ctrl-medium" placeholder="Search State"></asp:TextBox>
+                                                <input style="height:30px"  ID="txtCountry" runat="server" class="m-wrap m-ctrl-medium" placeholder="Search Country"></asp:TextBox>
+                                                <button ID="btnSearch" runat="server" class="btn red cancel" Text="Search" OnClick="btnSearch_Click" >Search</button>
+                                                <button ID="btnClear" runat="server" class="btn cancel" Text="Clear" OnClick="btnClear_Click" >Clear</button>
+
+                                        <br />
+                                        <div style="overflow: auto; cursor: -moz-grab;">
+                                            <div id="dvReport" runat="server">
+                                                
+                                                        <div style="display: none">
+                                                            <br />
+                                                            <br />
+                                                            <br />
+                                                            <br />
+                                                            <br />
+                                                        </div>
+                                                        <div>
+                                                            <img id="imgCompanyLogo" runat="server" />
+                                                        </div>
+                                                        <div>
+                                                            <label ID="lblCompanyName" runat="server"></label>
+                                                        </div>
+                                                
+                                            </div>
+                                            <div id="divPDF" runat="server" bgcolor="#FFFF00" style="display: none">
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <img id="img" runat="server" height="800" width="500" />
+                                            </div>
+                                            <div id="divPDF2" runat="server" bgcolor="#FFFF00" style="display: none">
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <img id="imgAge" runat="server" height="800" width="500" />
+                                            </div>
+                                            <div id="divPDF3" runat="server" bgcolor="#FFFF00" style="display: none">
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <img id="imgGeoGraph" runat="server" height="800" width="500" />
+                                            </div>
+                                            <div id="divPDF4" runat="server" bgcolor="#FFFF00" style="display: none">
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <img id="imgNPS4" runat="server" height="800" width="500" />
+                                            </div>
+                                            <div id="divPDF5" runat="server" bgcolor="#FFFF00" style="display: none">
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <img id="imgNPS5" runat="server" height="800" width="500" />
+                                            </div>
+                                            <div id="divPDF6" runat="server" bgcolor="#FFFF00" style="display: none">
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <img id="imgNPS6" runat="server" height="800" width="500" />
+                                            </div>
+                                            <div id="divPDF7" runat="server" bgcolor="#FFFF00" style="display: none">
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <img id="imgNPS7" runat="server" height="800" width="500" />
+                                            </div>
+                                            <div>
+                                                
+                                                        <iframe id="iframe1" runat="server" style="height: 0px; width: 0px"></iframe>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END SAMPLE FORM PORTLET-->
+                </div>
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+    </div>
+    <div id="close_div"></div>
+
+
+
+
+</div>
+
+</body>
+</html>
